@@ -95,14 +95,14 @@ sample_df = pd.DataFrame(data=sample,index=[0])
 sample_df[sample_df.columns] = 0
 sample_df[data.columns] = data
 
-ss = pickle.load(open("./models/scale.sav","rb"))
+# ss = pickle.load(open("./models/scale.sav","rb"))
 model = pickle.load(open("./models/model.sav","rb"))
-prediction = round(np.exp(model.predict(ss.transform(sample_df))[0]))
+# prediction = round(np.exp(model.predict(ss.transform(sample_df))[0]))
 
 column1,column2 = tab1.columns(2)
 _,resultbutton,_ = tab5.columns([1,1,1])
 if resultbutton.button(" ", type = "secondary"):
-    tab_result.image(chart(model,ss, sample_df,prediction), use_column_width="auto")
+    tab_result.image(chart(model, sample_df,prediction), use_column_width="auto")
     click_element('tab-2')
 
 pop_button = """<button id = "button-17" class="button-17" role="button"> ❔ Did You Know</button>"""

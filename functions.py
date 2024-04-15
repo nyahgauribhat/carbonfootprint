@@ -118,8 +118,8 @@ def hesapla(model,ss, sample_df):
     return hesap
 
 
-def chart(model, scaler,sample_df, prediction):
-    p = hesapla(model, scaler,sample_df)
+def chart(model,sample_df, prediction):
+    p = hesapla(model,sample_df)
     bbox_props = dict(boxstyle="round", facecolor="white", edgecolor="white", alpha=0.7)
 
     plt.figure(figsize=(10, 10))
