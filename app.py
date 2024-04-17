@@ -47,38 +47,33 @@ tab_result,_ = result.tabs([" "," "])
 
 def component():
     tab1col1, tab1col2 = tab1.columns(2)
-    # height = tab1col1.number_input("Height",0,251, value=None, placeholder="160", help="in cm")
-    # weight = tab1col2.number_input("Weight", 0, 250, value=None, placeholder="75", help="in kg")
-    # if (weight is None) or (weight == 0) : weight = 1
-    # if (height is None) or (height == 0) : height = 1
-    # calculation = weight / (height/100)**2
-    # body_type = "underweight" if (calculation < 18.5) else 
-    #              "normal" if ((calculation >=18.5) and (calculation < 25 )) else \
-    #              "overweight" if ((calculation >= 25) and (calculation < 30)) else "obese"
-    sex = tab1.selectbox(' Did you take a sub 10 minute shower?', ["Yes", "No"])
-    diet = tab1.selectbox(' Were you able to give up meat for a day?', ["Yes", "No"])
-    social = tab1.selectbox('Did you turn off the tap while brushing your teeth?', ["Yes", "No"])
+    shower = tab1.selectbox(' Did you take a sub 10 minute shower?', ["Yes", "No"])
+    eat_meat = tab1.selectbox(' Were you able to give up meat for a day?', ["Yes", "No"])
+    brush_teeth = tab1.selectbox('Did you turn off the tap while brushing your teeth?', ["Yes", "No"])
 
-    air_travel = tab2.selectbox('1. Did you carpool at least once this week?',["Yes", "No"])
+    carpool = tab2.selectbox('Did you carpool at least once this week?',["Yes", "No"])
 
-    waste_bag = tab3.selectbox('Were you able to use your own water bottle / coffee cup this week instead of a disposable one?', ["Yes", "No"])
-    waste_count = tab3.selectbox('Were you able to recycle any paper this week?', ["Yes", "No"])
-    recycle = tab3.selectbox('Did you avoid using plastic bags this week?', ["Yes", "No"])
+    water_bottle = tab3.selectbox('Were you able to use your own water bottle / coffee cup this week instead of a disposable one?', ["Yes", "No"])
+    recycle = tab3.selectbox('Were you able to recycle any paper this week?', ["Yes", "No"])
+    avoid_plastic = tab3.selectbox('Did you avoid using plastic bags this week?', ["Yes", "No"])
 
-    heating_energy = tab4.selectbox('Did you turn off the lights in your room before leaving for school?', ["Yes", "No"])
-    for_cooking = tab4.selectbox('What power source do you use for heating?', ["Yes", "No"])
+    lights = tab4.selectbox('Did you turn off the lights in your room before leaving for school?', ["Yes", "No"])
+    power = tab4.selectbox('Did you use the fan instead of the AC after sunset but before sleeping?', ["Yes", "No"])
 
-    clothes_monthly = tab5.selectbox('Did you buy a product from an eco-friendly / sustainable brand?', ["Yes", "No"])
-    data = {
-        
-            "Sex": sex,
-            'Diet': diet,
-            "Heating Energy Source": heating_energy,
-            "Social Activity": social,
-            "Frequency of Traveling by Air": air_travel,
-            "Waste Bag Size": waste_bag,
-            "Waste Bag Weekly Count": waste_count,
-            "How Many New Clothes Monthly": clothes_monthly,
+    buy_eco = tab5.selectbox('Did you buy a product from an eco-friendly / sustainable brand?', ["Yes", "No"])
+
+    # match model column names with the variables
+    data = {        
+            "Short Shower": shower,
+            "Meatless Day": eat_meat,
+            "Brushing Off": brush_teeth,
+            "Did you carpool?": carpool,
+            "Reusable Water Bottle": water_bottle,
+            "Recycled Paper": recycle,
+            "No Plastic": avoid_plastic,
+            "Lights Off": lights,
+            "Eco Friendly Brands": buy_eco,
+            "Fan instead of AC": power,
             }
     data.update({f"Cooking_with_{x}": y for x, y in
                  dict(zip(for_cooking, np.ones(len(for_cooking)))).items()})
