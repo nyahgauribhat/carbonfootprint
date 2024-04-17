@@ -50,6 +50,7 @@ def component():
     shower = tab1.selectbox(' Did you take a sub 10 minute shower?', ["Yes", "No"])
     eat_meat = tab1.selectbox(' Were you able to give up meat for a day?', ["Yes", "No"])
     brush_teeth = tab1.selectbox('Did you turn off the tap while brushing your teeth?', ["Yes", "No"])
+    leftovers = tab1.selectbox('Did you eat leftovers?', ["Yes", "No"])
 
     carpool = tab2.selectbox('Did you carpool at least once this week?',["Yes", "No"])
 
@@ -59,6 +60,8 @@ def component():
 
     lights = tab4.selectbox('Did you turn off the lights in your room before leaving for school?', ["Yes", "No"])
     power = tab4.selectbox('Did you use the fan instead of the AC after sunset but before sleeping?', ["Yes", "No"])
+    charger = tab4.selectbox('Did you unplug your charger once your device was done charging instead of leaving it all night? ', ["Yes", "No"])
+
 
     buy_eco = tab5.selectbox('Did you buy a product from an eco-friendly / sustainable brand?', ["Yes", "No"])
 
@@ -67,6 +70,7 @@ def component():
             "Short Shower": shower,
             "Meatless Day": eat_meat,
             "Brushing Off": brush_teeth,
+            "Leftovers":leftovers,
             "Did you carpool?": carpool,
             "Reusable Water Bottle": water_bottle,
             "Recycled Paper": recycle,
@@ -74,6 +78,7 @@ def component():
             "Lights Off": lights,
             "Eco Friendly Brands": buy_eco,
             "Fan instead of AC": power,
+            "Charger Unplugged":charger
             }
     data.update({f"Cooking_with_{x}": y for x, y in
                  dict(zip(for_cooking, np.ones(len(for_cooking)))).items()})
