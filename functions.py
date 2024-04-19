@@ -47,17 +47,24 @@ sample = {
  'Vehicle Type_electric': 0,
  'Vehicle Type_hybrid': 0,
  'Vehicle Type_lpg': 0,
- 'Vehicle Type_petrol': 0}
+ 'Vehicle Type_petrol': 0
+ }
 
 def input_preprocessing(data):
     # data["Body Type"] = data["Body Type"].map({'underweight':0, 'normal':1, 'overweight':2, 'obese':3})
-    data["Sex"] = data["Sex"].map({'female':0, 'male':1})
-    data = pd.get_dummies(data, columns=["Diet","Heating Energy Source"], dtype=int)
-    data["How Often Shower"] = data["How Often Shower"].map({'less frequently':0, 'daily':1, "twice a day":2, "more frequently":3})
-    data["Social Activity"] = data["Social Activity"].map({'never':0, 'sometimes':1, "often":2})
-    data["Frequency of Traveling by Air"] = data["Frequency of Traveling by Air"].map({'never':0, 'rarely':1, "frequently":2, "very frequently":3})
-    data["Waste Bag Size"] = data["Waste Bag Size"].map({'small':0, 'medium':1, "large":2,  "extra large":3})
-    data["Energy efficiency"] = data["Energy efficiency"].map({'No':0, 'Sometimes':1, "Yes":2})
+    data["Did you carpool?"] = data["Did you carpool?"].map({'No':0, 'Yes':1})
+    data["Reusable Water Bottle"] = data["Reusable Water Bottle"].map({'No':0, 'Yes':1})
+    data["Lights Off"] = data["Lights Off"].map({'No':0, 'Yes':1})
+    data["Recycled Paper"] = data["Recycled Paper"].map({'No':0, 'Yes':1})
+    data["Short Shower"] = data["Short Shower"].map({'No':0, 'Yes':1})
+    data["No Plastic Bags"] = data["No Plastic Bags"].map({'No':0, 'Yes':1})
+    data["Meatless Day"] = data["Meatless Day"].map({'No':0, 'Yes':1})
+    data["Brushing Off"] = data["Brushing Off"].map({'No':0, 'Yes':1})
+    data["Leftovers"] = data["Leftovers"].map({'No':0, 'Yes':1})
+    data["Fan Instead of AC"] = data["Fan Instead of AC"].map({'No':0, 'Yes':1})
+    data["Eco Friendly Brands"] = data["Eco Friendly Brands"].map({'No':0, 'Yes':1})
+    data["Charger Unplugged"] = data["Charger Unplugged"].map({'No':0, 'Yes':1})
+    # data = pd.get_dummies(data, columns=["Diet","Heating Energy Source"], dtype=int)
     return data
 def hesapla(model,ss, sample_df):
     copy_df = sample_df.copy()

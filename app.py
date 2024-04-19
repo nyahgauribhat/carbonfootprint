@@ -2,9 +2,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from streamlit.components.v1 import html
-from sklearn.neural_network import MLPRegressor
+# from sklearn.neural_network import MLPRegressor
+from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 import pickle
+import joblib
 import io
 import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw, ImageFont
@@ -67,42 +69,40 @@ def component():
 
     # match model column names with the variables
     data = {        
+            "Did you carpool?": carpool,
+            "Reusable Water Bottle": water_bottle,
+            "Lights Off": lights,
+            "Recycled Paper": recycle,
             "Short Shower": shower,
+            "No Plastic Bags": avoid_plastic,
             "Meatless Day": eat_meat,
             "Brushing Off": brush_teeth,
             "Leftovers":leftovers,
-            "Did you carpool?": carpool,
-            "Reusable Water Bottle": water_bottle,
-            "Recycled Paper": recycle,
-            "No Plastic": avoid_plastic,
-            "Lights Off": lights,
+            "Fan Instead of AC": power,
             "Eco Friendly Brands": buy_eco,
-            "Fan instead of AC": power,
             "Charger Unplugged":charger
             }
-    data.update({f"Cooking_with_{x}": y for x, y in
-                 dict(zip(for_cooking, np.ones(len(for_cooking)))).items()})
-    data.update({f"Do You Recyle_{x}": y for x, y in
-                 dict(zip(recycle, np.ones(len(recycle)))).items()})
-
 
     return pd.DataFrame(data, index=[0])
 
 df = component()
 data = input_preprocessing(df)
 
-sample_df = pd.DataFrame(data=sample,index=[0])
-sample_df[sample_df.columns] = 0
-sample_df[data.columns] = data
+# sample_df = pd.DataFrame(data=sample,index=[0])
+# sample_df[sample_df.columns] = 0
+# sample_df[data.columns] = data
 
-# ss = pickle.load(open("./models/scale.sav","rb"))
-model = pickle.load(open("./models/model.sav","rb"))
+ss = pickle.load(open("./models/scale.sav","rb"))
+# model = pickle.load(open("./models/carbonemission_model.sav","rb"))
+model=joblib.load('carbonemission_model.sav')
 # prediction = round(np.exp(model.predict(ss.transform(sample_df))[0]))
+prediction = model.predict(data)
 
 column1,column2 = tab1.columns(2)
 _,resultbutton,_ = tab5.columns([1,1,1])
 if resultbutton.button(" ", type = "secondary"):
-    tab_result.image(chart(model, sample_df,prediction), use_column_width="auto")
+    # tab_result.image(chart(model, sample_df,prediction), use_column_width="auto")
+    tab_result.markdown(f"""You owe nature <b>{prediction}</b> tree monthly.""",  unsafe_allow_html=True)
     click_element('tab-2')
 
 pop_button = """<button id = "button-17" class="button-17" role="button"> ❔ Did You Know</button>"""
@@ -123,7 +123,7 @@ if home.button("🏡"):
     click_element('tab-0')
 _,resultmid,_ = result.columns([1,2,1])
 
-tree_count = round(prediction / 411.4)
+tree_count = prediction
 tab_result.markdown(f"""You owe nature <b>{tree_count}</b> tree{'s' if tree_count > 1 else ''} monthly. <br> {f"<a href='https://www.tema.org.tr/en/homepage' id = 'button-17' class='button-17' role='button'> 🌳 Proceed to offset 🌳</a>" if tree_count > 0 else ""}""",  unsafe_allow_html=True)
 
 if resultmid.button("  ", type="secondary"):
