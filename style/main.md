@@ -1,5 +1,5 @@
+![logo](https://secondlifesolutions.com/envirovibes.png)
 ## Track your carbon footprint to generate exciting rewards for you and your team!
-![logo](envirovibes.png)
 
 We have all read and heard about the dire threat of Climate Change. However, the landscape of government regulation and global conferences, EVs and LEDs, melting glaciers and ozone holes leaves us feeling disconnected from the issue. 
 

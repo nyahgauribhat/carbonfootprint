@@ -40,6 +40,7 @@ main, comps , result = middle.tabs([" ", " ", " "])
 with open("./style/main.md", "r", encoding="utf-8") as main_page:
     main.markdown(f"""{main_page.read()}""")
 
+
 _,but,_ = main.columns([1,2,1])
 if but.button("Generate Now!", type="primary"):
     click_element('tab-1')
