@@ -144,7 +144,7 @@ def chart(model,sample_df, prediction):
 
     background = Image.open("./media/default.png")
     draw = ImageDraw.Draw(background)
-    font1 = ImageFont.truetype(font="./style/ArchivoBlack-Regular.ttf", size=50)
+    font1 = ImageFont.truetype(font="./style/arialuni.ttf", size=50)
     font = ImageFont.truetype(font="./style/arialuni.ttf", size=50)
     draw.text(xy=(320, 50), text=f"  How big is your\nCarbon Footprint?", font=font1, fill="#039e8e", stroke_width=1, stroke_fill="#039e8e")
     draw.text(xy=(370, 250), text=f"Monthly Emission \n\n   {prediction:.0f} kgCO₂e", font=font, fill="#039e8e", stroke_width=1, stroke_fill="#039e8e")

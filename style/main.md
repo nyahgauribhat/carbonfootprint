@@ -1,20 +1,10 @@
-# 🌳 Carbon Footprint
+## Track your carbon footprint to generate exciting rewards for you and your team!
+![logo](envirovibes.png)
 
-A carbon footprint measures the total greenhouse gas emissions linked to an individual, organization, event, or product. It's a crucial metric for gauging our impact on the environment and climate change.
+We have all read and heard about the dire threat of Climate Change. However, the landscape of government regulation and global conferences, EVs and LEDs, melting glaciers and ozone holes leaves us feeling disconnected from the issue. 
 
-# 🌳Why It Matters
+Where do we fit in? What can we do?  
 
-####  🍃Climate Impact
-Reducing your carbon footprint directly contributes to global efforts against climate change, mitigating extreme weather and rising temperatures.
+A simple thought - In the problem, lies the solution. We are part of the problem! 
 
-#### 🍃Resource Conservation
-Cutting carbon often means using fewer natural resources, and promoting sustainability in water, energy, and raw materials.
-
-#### 🍃Health and Well-being
-Lowering emissions supports healthier lifestyle choices, improving air quality and physical well-being.
-
-#### 🍃Sustainable Practices
-Measuring and managing your carbon footprint encourages eco-friendly choices, fostering a more sustainable society.
-
-#### 🍃Responsibility
-Acknowledging and addressing your carbon impact demonstrates social and environmental responsibility.
+Envirovibes charts out a pathway to become part of the solution.

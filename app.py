@@ -41,7 +41,7 @@ with open("./style/main.md", "r", encoding="utf-8") as main_page:
     main.markdown(f"""{main_page.read()}""")
 
 _,but,_ = main.columns([1,2,1])
-if but.button("Calculate Your Carbon Footprint!", type="primary"):
+if but.button("Generate Now!", type="primary"):
     click_element('tab-1')
 
 tab1, tab2, tab3, tab4, tab5 = comps.tabs([" Personal"," Travel"," Waste","Energy","Consumption"])
@@ -49,23 +49,23 @@ tab_result,_ = result.tabs([" "," "])
 
 def component():
     tab1col1, tab1col2 = tab1.columns(2)
-    shower = tab1.selectbox(' Did you take a sub 10 minute shower?', ["Yes", "No"])
-    eat_meat = tab1.selectbox(' Were you able to give up meat for a day?', ["Yes", "No"])
-    brush_teeth = tab1.selectbox('Did you turn off the tap while brushing your teeth?', ["Yes", "No"])
-    leftovers = tab1.selectbox('Did you eat leftovers?', ["Yes", "No"])
+    shower = tab1.selectbox(' Did you take a sub 10 minute shower, this week?', ["Yes", "No"])
+    eat_meat = tab1.selectbox(' Did you give up meat for a day, this week?', ["Yes", "No"])
+    brush_teeth = tab1.selectbox('Did you turn off the tap while brushing your teeth, this week?', ["Yes", "No"])
+    leftovers = tab1.selectbox('Did you not waste any food on your plate, this week?', ["Yes", "No"])
 
-    carpool = tab2.selectbox('Did you carpool at least once this week?',["Yes", "No"])
+    carpool = tab2.selectbox('Did you carpool at least once, this week? ',["Yes", "No"])
 
-    water_bottle = tab3.selectbox('Were you able to use your own water bottle / coffee cup this week instead of a disposable one?', ["Yes", "No"])
-    recycle = tab3.selectbox('Were you able to recycle any paper this week?', ["Yes", "No"])
-    avoid_plastic = tab3.selectbox('Did you avoid using plastic bags this week?', ["Yes", "No"])
+    water_bottle = tab3.selectbox('Did you use your own water bottle instead of a single use one, this week?', ["Yes", "No"])
+    recycle = tab3.selectbox('Did you put all your used paper in a recycling bin, this week?', ["Yes", "No"])
+    avoid_plastic = tab3.selectbox('Did you avoid taking carry bags from a store, this week?', ["Yes", "No"])
 
-    lights = tab4.selectbox('Did you turn off the lights in your room before leaving for school?', ["Yes", "No"])
-    power = tab4.selectbox('Did you use the fan instead of the AC after sunset but before sleeping?', ["Yes", "No"])
-    charger = tab4.selectbox('Did you unplug your charger once your device was done charging instead of leaving it all night? ', ["Yes", "No"])
+    lights = tab4.selectbox('Did you turn off the lights in your room before leaving your home, this week?', ["Yes", "No"])
+    power = tab4.selectbox('Did you reduce your air conditioner use by 2 hours, this week?', ["Yes", "No"])
+    charger = tab4.selectbox('Did you unplug your charger once your device was done charging instead of leaving it all night, this week? ', ["Yes", "No"])
 
 
-    buy_eco = tab5.selectbox('Did you buy a product from an eco-friendly / sustainable brand?', ["Yes", "No"])
+    buy_eco = tab5.selectbox('Did you refuse to indulge in fast fashion this week?', ["Yes", "No"])
 
     # match model column names with the variables
     data = {        
@@ -97,12 +97,14 @@ ss = pickle.load(open("./models/scale.sav","rb"))
 model=joblib.load('carbonemission_model.sav')
 # prediction = round(np.exp(model.predict(ss.transform(sample_df))[0]))
 prediction = model.predict(data)
-
+class_name_dict = {
+    1: 'biscuit', 2: 'cookie', 3: 'icecream', 4:'cake'}
+prediction = class_name_dict[prediction[0]]
 column1,column2 = tab1.columns(2)
 _,resultbutton,_ = tab5.columns([1,1,1])
 if resultbutton.button(" ", type = "secondary"):
     # tab_result.image(chart(model, sample_df,prediction), use_column_width="auto")
-    tab_result.markdown(f"""You owe nature <b>{prediction}</b> tree monthly.""",  unsafe_allow_html=True)
+    tab_result.markdown(f"""Your reward for the week is: \n <b>{prediction}</b>! """,  unsafe_allow_html=True)
     click_element('tab-2')
 
 pop_button = """<button id = "button-17" class="button-17" role="button"> ❔ Did You Know</button>"""
@@ -124,7 +126,7 @@ if home.button("🏡"):
 _,resultmid,_ = result.columns([1,2,1])
 
 tree_count = prediction
-tab_result.markdown(f"""You owe nature <b>{tree_count}</b> tree{'s' if tree_count > 1 else ''} monthly. <br> {f"<a href='https://www.tema.org.tr/en/homepage' id = 'button-17' class='button-17' role='button'> 🌳 Proceed to offset 🌳</a>" if tree_count > 0 else ""}""",  unsafe_allow_html=True)
+#tab_result.markdown(f"""You owe nature <b>{tree_count}</b> tree{'s' if tree_count > 1 else ''} monthly. <br> {f"<a href='https://www.tema.org.tr/en/homepage' id = 'button-17' class='button-17' role='button'> 🌳 Proceed to offset 🌳</a>" if tree_count > 0 else ""}""",  unsafe_allow_html=True)
 
 if resultmid.button("  ", type="secondary"):
     click_element('tab-1')
