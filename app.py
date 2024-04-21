@@ -33,7 +33,7 @@ def script():
         open_script = f"""<script>{scripts.read()}</script> """
         html(open_script, width=0, height=0)
 
-
+#for indentation
 left, middle, right = st.columns([2,3.5,2])
 main, comps , result = middle.tabs([" ", " ", " "])
 
@@ -90,9 +90,9 @@ data = input_preprocessing(df)
 
 # sample_df = pd.DataFrame(data=sample,index=[0])
 # sample_df[sample_df.columns] = 0
-# sample_df[data.columns] = data
+# # sample_df[data.columns] = data
 
-ss = pickle.load(open("./models/scale.sav","rb"))
+# ss = pickle.load(open("./models/scale.sav","rb"))
 # model = pickle.load(open("./models/carbonemission_model.sav","rb"))
 model=joblib.load('carbonemission_model.sav')
 # prediction = round(np.exp(model.predict(ss.transform(sample_df))[0]))
@@ -100,11 +100,21 @@ prediction = model.predict(data)
 class_name_dict = {
     1: 'biscuit', 2: 'cookie', 3: 'icecream', 4:'cake'}
 prediction = class_name_dict[prediction[0]]
+features_dict = {
+
+    'biscuit': ['For next week, you should try:' , 'Using the AC Less', 'Eating Less Meat', 'Recycling Paper'],
+     'cookie': ['For next week, you should try:' ,'Eating Less Meat', 'Using The AC Less', 'Finishing All Your Food'],
+     'icecream':['For next week, you should try:' ,'Carpooling More','Using A Reusable Water Bottle','Unplugging Your Charger'] ,
+     'cake':['Congratulations, keep at this!']
+}
 column1,column2 = tab1.columns(2)
 _,resultbutton,_ = tab5.columns([1,1,1])
 if resultbutton.button(" ", type = "secondary"):
     # tab_result.image(chart(model, sample_df,prediction), use_column_width="auto")
     tab_result.markdown(f"""Your reward for the week is: \n <b>{prediction}</b>! """,  unsafe_allow_html=True)
+    suggestion_lst = features_dict[prediction]
+    for suggestion in suggestion_lst:
+        tab_result.markdown(f"""{suggestion}""",unsafe_allow_html=True)
     click_element('tab-2')
 
 pop_button = """<button id = "button-17" class="button-17" role="button"> ❔ Did You Know</button>"""
