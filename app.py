@@ -99,14 +99,14 @@ model=joblib.load('carbonemission_model.sav')
 # prediction = round(np.exp(model.predict(ss.transform(sample_df))[0]))
 prediction = model.predict(data)
 class_name_dict = {
-    1: 'biscuit', 2: 'cookie', 3: 'icecream', 4:'cake'}
+    1: 'Movie Night with Kung Fu Panda 4 or a Walk on Marine Drive!', 2: 'Baking Chocolate Chip Cookies or a Game of Monodeal!', 3: 'Thrift Shopping at Thrift Flip or a Dinner at Americano!', 4:'Dynamic Duos Party Night or a Drive to Magnolia!'}
 prediction = class_name_dict[prediction[0]]
 features_dict = {
 
-    'biscuit': ['For next week, you should try:' , 'Using the AC Less', 'Eating Less Meat', 'Recycling Paper'],
-     'cookie': ['For next week, you should try:' ,'Eating Less Meat', 'Using The AC Less', 'Finishing All Your Food'],
-     'icecream':['For next week, you should try:' ,'Carpooling More','Using A Reusable Water Bottle','Unplugging Your Charger'] ,
-     'cake':['Congratulations, keep at this!']
+    'Movie Night with Kung Fu Panda 4 or a Walk on Marine Drive!': ['For next week, you should try:' , 'Using the AC Less', 'Eating Less Meat', 'Recycling Paper'],
+     'Baking Chocolate Chip Cookies or a Game of Monodeal!': ['For next week, you should try:' ,'Eating Less Meat', 'Using The AC Less', 'Finishing All Your Food'],
+     'Thrift Shopping at Thrift Flip or a Dinner at Americano!':['For next week, you should try:' ,'Carpooling More','Using A Reusable Water Bottle','Unplugging Your Charger'] ,
+     'Dynamic Duos Party Night or a Drive to Magnolia!':['Congratulations, keep at this!']
 }
 column1,column2 = tab1.columns(2)
 _,resultbutton,_ = tab5.columns([1,1,1])
@@ -118,19 +118,19 @@ if resultbutton.button(" ", type = "secondary"):
         tab_result.markdown(f"""{suggestion}""",unsafe_allow_html=True)
     click_element('tab-2')
 
-pop_button = """<button id = "button-17" class="button-17" role="button"> ❔ Did You Know</button>"""
+# pop_button = """<button id = "button-17" class="button-17" role="button"> ❔ Did You Know</button>"""
 _,home,_ = comps.columns([1,2,1])
 _,col2,_ = comps.columns([1,10,1])
-col2.markdown(pop_button, unsafe_allow_html=True)
-pop = """
-<div id="popup" class="DidYouKnow_root">
-<p class="DidYouKnow_title TextNew" style="font-size: 20px;"> ❔ Did you know</p>
-    <p id="popupText" class="DidYouKnow_content TextNew"><span>
-    Each year, human activities release over 40 billion metric tons of carbon dioxide into the atmosphere, contributing to climate change.
-    </span></p>
-</div>
-"""
-col2.markdown(pop, unsafe_allow_html=True)
+# col2.markdown(pop_button, unsafe_allow_html=True)
+# pop = """
+# <div id="popup" class="DidYouKnow_root">
+# <p class="DidYouKnow_title TextNew" style="font-size: 20px;"> ❔ Did you know</p>
+#     <p id="popupText" class="DidYouKnow_content TextNew"><span>
+#     Each year, human activities release over 40 billion metric tons of carbon dioxide into the atmosphere, contributing to climate change.
+#     </span></p>
+# </div>
+# """
+# col2.markdown(pop, unsafe_allow_html=True)
 
 if home.button("🏡"):
     click_element('tab-0')
